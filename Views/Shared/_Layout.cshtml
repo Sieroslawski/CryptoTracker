@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - CryptoTracker</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" id="stylesheet" type="text/css" />
+    <style>
+        body {
+            background-color: white;
+            color: black;
+        }
+
+        .dark-mode {
+            background-color: black;
+            color: white;
+        }
+    </style>
+</head>
+<body id="theme">
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">CryptoTracker</a>
+                <span class="dark-mode-description">Theme: </span>
+                <button id="toggle-btn" class="dark-mode-toggle">☀️</button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                    </ul>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2022 - CryptoTracker - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+<script>
+    const toggleBtn = document.getElementById('toggle-btn');
+    const theme = document.getElementById('theme');
+    let darkMode = localStorage.getItem('dark-mode');
+    let darkModeText = localStorage.getItem('dark-mode-text')
+    let initialText = '☀️'
+
+    const enableDarkMode = () => {
+        theme.classList.add('dark-mode-theme');
+        toggleBtn.classList.remove('dark-mode-toggle');
+        localStorage.setItem('dark-mode', 'enabled');
+        localStorage.setItem('dark-mode-text', '🌑')
+        toggleBtn.innerText = '🌑';
+        console.log(toggleBtn.innerText);
+
+    }
+
+    const disableDarkMode = () => {
+        theme.classList.remove('dark-mode-theme');
+        toggleBtn.classList.add('dark-mode-toggle');
+        localStorage.setItem('dark-mode', 'disabled');
+        localStorage.setItem('dark-mode-text', initialText)
+        toggleBtn.innerText = initialText;
+        console.log(toggleBtn.innerText);
+    }
+
+    if (darkMode === 'enabled') {
+        enableDarkMode()
+    }
+
+    toggleBtn.addEventListener('click', (e) => {
+        if (toggleBtn.textContent.toLowerCase().includes(initialText.toLowerCase()) && darkMode === 'disabled') {
+            enableDarkMode();
+        } else {
+            disableDarkMode();
+        }
+    })
+</script>
