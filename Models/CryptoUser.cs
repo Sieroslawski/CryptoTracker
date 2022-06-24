@@ -11,9 +11,9 @@ namespace CryptoTracker.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int userID { get; set; }
-        public string firstName { get; set; }
-        public string lastName { get; set; }
+        public int userID { get; set; }       
+        public string firstName { get; set; }       
+        public string lastName { get; set; }       
         public string userName { get; set; }
         public string email { get; set; }
         public virtual ICollection<CryptoUserTransaction> UserTransactions { get; set; }

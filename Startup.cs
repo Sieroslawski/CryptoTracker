@@ -34,6 +34,12 @@ namespace CryptoTracker
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false) //Change to true later
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+            });
+
             services.AddControllersWithViews();
         }
 
@@ -53,7 +59,7 @@ namespace CryptoTracker
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthentication();
