@@ -7,10 +7,25 @@
 }
 @if (SignInManager.IsSignedIn(User))
 {
-    <div class="text-center">
-        <h1 class="display-4">Welcome</h1>
-        <p>This is your portfolio</p>
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>This is your portfolio</p>
+    @using (Html.BeginForm())
+    {      
+<div class="search-div">   
+    @Html.TextBox("CoinSearch", null, new { @class = "form-control", @placeholder = "🔍 Search token name or ticker", onclick = "toggleDropdown()", onkeyup="filterFunction()" })
+    <div id="coin-dropdown">
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
     </div>
+</div>      
+    }
+</div>
 }
 else
 {
@@ -19,3 +34,27 @@ else
         <p><a asp-area="Identity" asp-page="/Account/Login">Login</a> or <a asp-area="Identity" asp-page="/Account/Register">Register</a> to view your portfolio.</p>
     </div>
 }
+
+<script>
+
+    function toggleDropdown() {
+        document.getElementById("coin-dropdown").classList.toggle("show");
+    }
+
+    function filterFunction() {
+        let input, filter, a, i;
+        input = document.getElementById("CoinSearch");
+        filter = input.value.toUpperCase();
+        div = document.getElementById("coin-dropdown");
+        a = div.getElementsByTagName("li");
+        for (i = 0; i < a.length; i++) {
+            txtValue = a[i].textContent || a[i].innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                a[i].style.display = "";
+            } else {
+                a[i].style.display = "none";
+            }
+        }
+    }
+
+</script>

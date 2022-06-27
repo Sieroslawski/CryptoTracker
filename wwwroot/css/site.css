@@ -7,6 +7,30 @@ body {
     margin: 0;
 }
 
+.show {
+    display: none;
+}
+
+#coin-dropdown {   
+    position: inherit;
+    background-color: #f6f6f6;
+    min-width: 230px;   
+    border: 1px solid #ddd;
+    z-index: 1;
+}
+
+#coin-dropdown li {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+#coin-dropdown li:hover {
+    background-color: #ddd;
+}
+
 #toggle-btn {
     padding: 0;
     border: none;
