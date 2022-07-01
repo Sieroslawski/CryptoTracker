@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CryptoTracker.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220623021824_initialCreate")]
+    [Migration("20220627224514_initialCreate")]
     partial class initialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -69,6 +69,9 @@ namespace CryptoTracker.Migrations
 
                     b.Property<decimal>("coinAmount")
                         .HasColumnType("decimal(18,4)");
+
+                    b.Property<int>("coinID")
+                        .HasColumnType("int");
 
                     b.Property<string>("coinImage")
                         .HasColumnType("nvarchar(max)");

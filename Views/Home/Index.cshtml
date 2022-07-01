@@ -2,30 +2,32 @@
 @using Microsoft.AspNetCore.Http;
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
+@model IEnumerable<CryptoTracker.Models.Trending>
 @{
     ViewData["Title"] = "Home Page";
 }
 @if (SignInManager.IsSignedIn(User))
 {
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>This is your portfolio</p>
-    @using (Html.BeginForm())
-    {      
-<div class="search-div">   
-    @Html.TextBox("CoinSearch", null, new { @class = "form-control", @placeholder = "🔍 Search token name or ticker", onclick = "toggleDropdown()", onkeyup="filterFunction()" })
-    <div id="coin-dropdown">
-        <ul>
-            <li>1</li>
-            <li>2</li>
-            <li>3</li>
-            <li>4</li>
-            <li>5</li>
-        </ul>
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <p>This is your portfolio</p>
+        @using (Html.BeginForm())
+        {
+            <div class="search-div">
+                @Html.TextBox("CoinSearch", null, new { @class = "form-control", @placeholder = "🔍 Search token name or ticker", onclick = "toggleDropdown()", onkeyup = "filterFunction()" })
+                <div id="coin-dropdown">
+                    <p class="trending-coins">Trending Coins 🔥</p>
+                    <ul>
+                        @foreach (var item in Model)
+                        {
+                        <li>@item.coins</li>
+                       
+                        }
+                    </ul>
+                </div>
+            </div>
+        }
     </div>
-</div>      
-    }
-</div>
 }
 else
 {

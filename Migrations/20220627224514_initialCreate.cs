@@ -68,6 +68,7 @@ namespace CryptoTracker.Migrations
                 {
                     transactionID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    coinID = table.Column<int>(type: "int", nullable: false),
                     coinImage = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     coinTicker = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     coinAmount = table.Column<decimal>(type: "decimal(18,4)", nullable: false),

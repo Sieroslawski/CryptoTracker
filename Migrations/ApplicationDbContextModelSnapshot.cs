@@ -68,6 +68,9 @@ namespace CryptoTracker.Migrations
                     b.Property<decimal>("coinAmount")
                         .HasColumnType("decimal(18,4)");
 
+                    b.Property<int>("coinID")
+                        .HasColumnType("int");
+
                     b.Property<string>("coinImage")
                         .HasColumnType("nvarchar(max)");
 

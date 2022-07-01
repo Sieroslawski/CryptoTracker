@@ -11,6 +11,11 @@ body {
     display: none;
 }
 
+.trending-coins {
+    text-align: left;
+    padding: 10px;
+}
+
 #coin-dropdown {   
     position: inherit;
     background-color: #f6f6f6;
