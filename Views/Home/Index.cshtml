@@ -2,7 +2,7 @@
 @using Microsoft.AspNetCore.Http;
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
-@model IEnumerable<CryptoTracker.Models.Trending>
+@model List<CryptoTracker.Models.Coin>
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -20,7 +20,7 @@
                     <ul>
                         @foreach (var item in Model)
                         {
-                        <li>@item.coins</li>
+                        <li><img src="@item.item.thumb" /> @item.item.name (@item.item.symbol) <span class="text-right">#@item.item.market_cap_rank</span></li>
                        
                         }
                     </ul>

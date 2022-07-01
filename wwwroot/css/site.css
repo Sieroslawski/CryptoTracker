@@ -16,6 +16,12 @@ body {
     padding: 10px;
 }
 
+.text-right {
+    display: inline-block;
+    float: right;
+}
+
+
 #coin-dropdown {   
     position: inherit;
     background-color: #f6f6f6;
