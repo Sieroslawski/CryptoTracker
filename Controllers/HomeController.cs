@@ -31,6 +31,7 @@ namespace CryptoTracker.Controllers
 
         public async Task<IActionResult> Index()
         {
+            try { 
             List<Coin> Trend = new List<Coin>();
 
             var message = new HttpRequestMessage();
@@ -49,6 +50,10 @@ namespace CryptoTracker.Controllers
             } 
 
             return View(Trend);
+        } catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
