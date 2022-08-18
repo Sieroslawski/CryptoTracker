@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Dynamic;
 using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
@@ -30,26 +31,27 @@ namespace CryptoTracker.Controllers
         }
 
         public async Task<IActionResult> Index()
-        {
-            try { 
-            List<Coin> Trend = new List<Coin>();
+        {           
+            try {
 
-            var message = new HttpRequestMessage();
-            message.Method = HttpMethod.Get;
-            message.RequestUri = new Uri($"{BASE_URL}search/trending");
-            message.Headers.Add("Accept", "application/json");
+                List<Coin> Trend = new List<Coin>();
+                dynamic model = new ExpandoObject();
+                var message = new HttpRequestMessage();
+                message.Method = HttpMethod.Get;
+                message.RequestUri = new Uri($"{BASE_URL}search/trending");
+                message.Headers.Add("Accept", "application/json");
 
-            var client = _clientFactory.CreateClient();
-            var response = await client.SendAsync(message);
+                var client = _clientFactory.CreateClient();
+                var response = await client.SendAsync(message);
 
-            if (response.IsSuccessStatusCode)
-            {
-                var responseContent = await response.Content.ReadAsStringAsync();
-                var objResponse = JsonConvert.DeserializeObject<Trending>(responseContent);
-                Trend = objResponse.coins.ToList();
-            } 
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseContent = await response.Content.ReadAsStringAsync();
+                    var objResponse = JsonConvert.DeserializeObject<Trending>(responseContent);
+                    model.Trend = objResponse.coins.ToList();
+                }
 
-            return View(Trend);
+                return View(model);
         } catch (Exception ex)
             {
                 throw ex;

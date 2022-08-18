@@ -34,5 +34,4 @@ namespace CryptoTracker.Models
         public int score { get; set; }
     }
 
-
 }

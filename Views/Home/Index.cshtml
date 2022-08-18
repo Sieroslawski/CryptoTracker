@@ -2,7 +2,7 @@
 @using Microsoft.AspNetCore.Http;
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
-@model List<CryptoTracker.Models.Coin>
+@model dynamic
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -18,10 +18,10 @@
                 <div id="coin-dropdown">
                     <p class="trending-coins">Trending Coins 🔥</p>
                     <ul>
-                        @foreach (var item in Model)
+                        @foreach (var item in Model.Trend)
                         {
-                        <li><img src="@item.item.thumb" /> @item.item.name (@item.item.symbol) <span class="text-right">#@item.item.market_cap_rank</span></li>
-                       
+                            <li><img src="@item.item.thumb" /> @item.item.name (@item.item.symbol) <span class="text-right">#@item.item.market_cap_rank</span></li>
+
                         }
                     </ul>
                 </div>
