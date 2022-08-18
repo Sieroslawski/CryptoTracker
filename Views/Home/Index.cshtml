@@ -40,7 +40,12 @@ else
 <script>
 
     function toggleDropdown() {
-        document.getElementById("coin-dropdown").classList.toggle("show");
+        var x = document.getElementById("coin-dropdown");
+        if (x.style.display === 'block') {
+            x.style.display = 'none'
+        } else {
+            x.style.display = 'block'
+        }      
     }
 
     function filterFunction() {
