@@ -7,25 +7,28 @@
     ViewData["Title"] = "Home Page";
 }
 @if (SignInManager.IsSignedIn(User))
-{
+{    
     <div class="text-center">
         <h1 class="display-4">Welcome</h1>
         <p>This is your portfolio</p>
         @using (Html.BeginForm())
         {
-            <div class="search-div">
-                @Html.TextBox("CoinSearch", null, new { @class = "form-control", @placeholder = "🔍 Search token name or ticker", onclick = "toggleDropdown()", onkeyup = "filterFunction()" })
-                <div id="coin-dropdown">
-                    <p class="trending-coins">Trending Coins 🔥</p>
-                    <ul>
-                        @foreach (var item in Model.Trend)
-                        {
-                            <li><img src="@item.item.thumb" /> @item.item.name (@item.item.symbol) <span class="text-right">#@item.item.market_cap_rank</span></li>
+    <div class="search-div">
 
-                        }
-                    </ul>
-                </div>
+        @Html.TextBox("CoinSearch", "", new { @class = "form-control", @placeholder = "🔍 Search token name or ticker", onclick = "toggleDropdown()", onkeyup = "filterFunction()" })
+           
+            <div id="coin-dropdown">
+                <p class="trending-coins">Trending Coins 🔥</p>
+                <ul>
+                    @foreach (var item in Model.Trend)
+                    {
+                        <li><img src="@item.item.thumb" /> @item.item.name (@item.item.symbol) <span class="text-right">#@item.item.market_cap_rank</span></li>
+
+                    }
+                </ul>
             </div>
+            <input type="submit" />
+    </div>
         }
     </div>
 }
@@ -38,15 +41,15 @@ else
 }
 
 <script>
-
-    function toggleDropdown() {
+    var input = document.getElementById("CoinSearch").value;
+    function toggleDropdown() {        
         var x = document.getElementById("coin-dropdown");
         if (x.style.display === 'block') {
             x.style.display = 'none'
         } else {
             x.style.display = 'block'
         }      
-    }
+    };
 
     function filterFunction() {
         let input, filter, a, i;
