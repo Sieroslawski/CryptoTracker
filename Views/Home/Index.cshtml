@@ -17,7 +17,7 @@
         {
     <div class="search-div">
         <div class="searching">
-            @Html.TextBox("CoinSearch", "", new { @class = "form-control", @placeholder = "🔍 Search token name or ticker", onclick = "toggleDropdown()", onkeyup = "filterFunction()" })
+            @Html.TextBox("CoinSearch", "", new { @class = "form-control", @placeholder = "🔍 Search token name or ticker", onclick = "toggleDropdown()", onkeyup = "filterFunction()", autocomplete = "off" })
             <input type="submit" value="Search" class="btn btn-outline-primary" />
         </div>
         @if ((Model.Search).ToString() == "")
@@ -72,6 +72,11 @@ else
             x.style.display = 'block'
         }      
     };
+
+    $("#messageform").submit(function (e) {
+        e.preventDefault();
+        $("#message").focus();//this here
+    });
 
     function filterFunction() {
         let input, filter, a, i;
