@@ -11,6 +11,10 @@ body {
     display: none;
 }
 
+.searching {
+    display: flex;
+}
+
 .trending-coins {
     text-align: left;
     padding: 10px;

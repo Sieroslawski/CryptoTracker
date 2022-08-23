@@ -50,6 +50,7 @@ namespace CryptoTracker.Controllers
                     var responseContent = await response.Content.ReadAsStringAsync();
                     var objResponse = JsonConvert.DeserializeObject<Trending>(responseContent);
                     model.Trend = objResponse.coins.ToList();
+                    model.Search = "";
                    
                 }                             
 
@@ -64,6 +65,7 @@ namespace CryptoTracker.Controllers
         public async Task<IActionResult> Index(string CoinSearch)
         {
             List<Coins> Search = new List<Coins>();
+
             dynamic model = new ExpandoObject();
 
             var searchMessage = new HttpRequestMessage();
