@@ -9,12 +9,19 @@
 @if (SignInManager.IsSignedIn(User))
 {
     int count = 0;
+    string coinId = "";
+
+    string getID(string id)
+    {
+        coinId = id;        
+        return coinId;
+    }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>This is your portfolio</p>
     @using (Html.BeginForm())
-    {
+    {       
         <div class="search-div">
             <div class="searching">
                 @Html.TextBox("CoinSearch", "", new { @class = "form-control", @placeholder = "🔍 Search token name or ticker", onclick = "toggleDropdown()", onkeyup = "filterFunction()", autocomplete = "off" })
@@ -26,8 +33,8 @@
                     <p class="trending-coins">Trending Coins 🔥</p>
                     <ul>
                         @foreach (var item in Model.Trend)
-                        {
-                            <a href="#" data-toggle="modal" data-target="#transactionModal">
+                        {                          
+                            <a href="#" data-toggle="modal" data-target="#transactionModal" onclick="@getID(item.item.id)">
                             <li><img src="@item.item.thumb" /> @item.item.name (@item.item.symbol) <span class="text-right">#@item.item.market_cap_rank</span></li></a>
 
                         }
@@ -40,7 +47,7 @@
                     <p class="trending-coins">Searched Coins 🔍</p>
                     <ul>
                         @foreach (var item in Model.Search)
-                        {
+                        {                            
                             <a href="#" data-toggle="modal" data-target="#transactionModal">
                             <li><img src="@item.thumb" /> @item.name (@item.symbol) <span class="text-right">#@item.market_cap_rank</span></li></a>
                             if (++count == 7)

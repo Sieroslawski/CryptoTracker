@@ -8,10 +8,18 @@ namespace CryptoTracker.Repositories
 {
     public class TransactionRepo
     {
+        public string coinId = "";
         public List<Trending> GetTrend()
         {
             List<Trending> trending = new List<Trending>();
             return trending;
         }
+           
+        
+        public void getID(string id)
+        {
+            coinId = id;
+        }
     }
 }
+

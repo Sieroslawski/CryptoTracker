@@ -12,7 +12,7 @@ namespace CryptoTracker.Models
     {
         [Key, Column(Order = 0)]
         public int transactionID { get; set; }
-        [DisplayName("Coin ID")]
+        [DisplayName("Coin Name")]
         public int coinID { get; set; }
         [DisplayName("Coin Image")]
         public string coinImage { get; set; }

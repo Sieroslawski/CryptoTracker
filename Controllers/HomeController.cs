@@ -21,6 +21,7 @@ namespace CryptoTracker.Controllers
         private readonly IHttpClientFactory _clientFactory;
         
         const string BASE_URL = "https://api.coingecko.com/api/v3/search";
+        const string SINGLE_COIN_URL = "https://api.coingecko.com/api/v3/coins/";
         public bool GetError { get; private set; }
       
 
@@ -33,8 +34,7 @@ namespace CryptoTracker.Controllers
         public async Task<IActionResult> Index()
         {           
             try {
-                List<Coin> Trend = new List<Coin>();
-                
+                               
                 dynamic model = new ExpandoObject();
 
                 var message = new HttpRequestMessage();
@@ -64,26 +64,53 @@ namespace CryptoTracker.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(string CoinSearch)
         {
-            List<Coins> Search = new List<Coins>();
+            try
+            {
+                dynamic model = new ExpandoObject();
 
+                var searchMessage = new HttpRequestMessage();
+                searchMessage.Method = HttpMethod.Get;
+                searchMessage.RequestUri = new Uri($"{BASE_URL}?query={CoinSearch}");
+                searchMessage.Headers.Add("Accept", "application/json");
+
+                var clientSearch = _clientFactory.CreateClient();
+                var responseSearch = await clientSearch.SendAsync(searchMessage);
+
+                if (responseSearch.IsSuccessStatusCode)
+                {
+                    var responseContent = await responseSearch.Content.ReadAsStringAsync();
+                    var objResponse = JsonConvert.DeserializeObject<Search>(responseContent);
+                    model.Search = objResponse.coins.ToList();
+                                     
+                }
+
+                return View(model);
+            } catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<IActionResult> GetCoin(string coinId)
+        {
             dynamic model = new ExpandoObject();
 
-            var searchMessage = new HttpRequestMessage();
-            searchMessage.Method = HttpMethod.Get;
-            searchMessage.RequestUri = new Uri($"{BASE_URL}?query={CoinSearch}");
-            searchMessage.Headers.Add("Accept", "application/json");
+            var coinMessage = new HttpRequestMessage();
+            coinMessage.Method = HttpMethod.Get;
+            coinMessage.RequestUri = new Uri($"{SINGLE_COIN_URL}{coinId}?localization=false&tickers=false&community_data=false&developer_data=false&sparkline=false");
+            coinMessage.Headers.Add("Accept", "application/json");
 
             var clientSearch = _clientFactory.CreateClient();
-            var responseSearch = await clientSearch.SendAsync(searchMessage);
+            var responseSearch = await clientSearch.SendAsync(coinMessage);
 
             if (responseSearch.IsSuccessStatusCode)
             {
                 var responseContent = await responseSearch.Content.ReadAsStringAsync();
-                var objResponse = JsonConvert.DeserializeObject<Search>(responseContent);
-                model.Search = objResponse.coins.ToList();
+                var objResponse = JsonConvert.DeserializeObject<SingleCoin>(responseContent);
+               /* model.SingleCoin = objResponse.market_data.ToList();*/
             }
-
             return View(model);
+
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

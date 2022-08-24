@@ -396,37 +396,6 @@ namespace CryptoTracker.Models
         public DateTime sats { get; set; }
     }
 
-    public class CodeAdditionsDeletions4Weeks
-    {
-        public int additions { get; set; }
-        public int deletions { get; set; }
-    }
-
-    public class CommunityData
-    {
-        public object facebook_likes { get; set; }
-        public int twitter_followers { get; set; }
-        public double reddit_average_posts_48h { get; set; }
-        public double reddit_average_comments_48h { get; set; }
-        public int reddit_subscribers { get; set; }
-        public int reddit_accounts_active_48h { get; set; }
-        public object telegram_channel_user_count { get; set; }
-    }
-
-    public class ConvertedLast
-    {
-        public double btc { get; set; }
-        public double eth { get; set; }
-        public int usd { get; set; }
-    }
-
-    public class ConvertedVolume
-    {
-        public double btc { get; set; }
-        public double eth { get; set; }
-        public long usd { get; set; }
-    }
-
     public class CurrentPrice
     {
         public int aed { get; set; }
@@ -495,20 +464,6 @@ namespace CryptoTracker.Models
     public class Description
     {
         public string en { get; set; }
-    }
-
-    public class DeveloperData
-    {
-        public int forks { get; set; }
-        public int stars { get; set; }
-        public int subscribers { get; set; }
-        public int total_issues { get; set; }
-        public int closed_issues { get; set; }
-        public int pull_requests_merged { get; set; }
-        public int pull_request_contributors { get; set; }
-        public CodeAdditionsDeletions4Weeks code_additions_deletions_4_weeks { get; set; }
-        public int commit_count_4_weeks { get; set; }
-        public List<int> last_4_weeks_commit_activity_series { get; set; }
     }
 
     public class FullyDilutedValuation
@@ -728,13 +683,6 @@ namespace CryptoTracker.Models
         public int sats { get; set; }
     }
 
-    public class Market
-    {
-        public string name { get; set; }
-        public string identifier { get; set; }
-        public bool has_trading_incentive { get; set; }
-    }
-
     public class MarketCap
     {
         public long aed { get; set; }
@@ -818,7 +766,7 @@ namespace CryptoTracker.Models
         public long cny { get; set; }
         public long czk { get; set; }
         public long dkk { get; set; }
-        public double dot { get; set; }
+        public int dot { get; set; }
         public long eos { get; set; }
         public double eth { get; set; }
         public long eur { get; set; }
@@ -842,7 +790,7 @@ namespace CryptoTracker.Models
         public long php { get; set; }
         public long pkr { get; set; }
         public long pln { get; set; }
-        public double rub { get; set; }
+        public long rub { get; set; }
         public long sar { get; set; }
         public long sek { get; set; }
         public long sgd { get; set; }
@@ -855,14 +803,14 @@ namespace CryptoTracker.Models
         public long vnd { get; set; }
         public int xag { get; set; }
         public int xau { get; set; }
-        public int xdr { get; set; }
+        public long xdr { get; set; }
         public long xlm { get; set; }
-        public long xrp { get; set; }
+        public double xrp { get; set; }
         public double yfi { get; set; }
         public long zar { get; set; }
-        public int bits { get; set; }
+        public double bits { get; set; }
         public int link { get; set; }
-        public long sats { get; set; }
+        public double sats { get; set; }
     }
 
     public class MarketCapChangePercentage24hInCurrency
@@ -978,13 +926,13 @@ namespace CryptoTracker.Models
 
     public class Platforms
     {
-        public string platform  { get; set; }
+        public string platform {get; set; }
     }
 
 public class PriceChange24hInCurrency
 {
     public double aed { get; set; }
-    public double ars { get; set; }
+    public int ars { get; set; }
     public double aud { get; set; }
     public double bch { get; set; }
     public double bdt { get; set; }
@@ -1009,10 +957,10 @@ public class PriceChange24hInCurrency
     public int idr { get; set; }
     public double ils { get; set; }
     public double inr { get; set; }
-    public double jpy { get; set; }
+    public int jpy { get; set; }
     public int krw { get; set; }
     public double kwd { get; set; }
-    public double lkr { get; set; }
+    public int lkr { get; set; }
     public double ltc { get; set; }
     public int mmk { get; set; }
     public double mxn { get; set; }
@@ -1578,7 +1526,7 @@ public class ReposUrl
     public List<object> bitbucket { get; set; }
 }
 
-public class Root
+public class SingleCoin
 {
     public string id { get; set; }
     public string symbol { get; set; }
@@ -1605,34 +1553,9 @@ public class Root
     public double liquidity_score { get; set; }
     public double public_interest_score { get; set; }
     public MarketData market_data { get; set; }
-    public CommunityData community_data { get; set; }
-    public DeveloperData developer_data { get; set; }
     public PublicInterestStats public_interest_stats { get; set; }
     public List<object> status_updates { get; set; }
     public DateTime last_updated { get; set; }
-    public List<Ticker> tickers { get; set; }
-}
-
-public class Ticker
-{
-    public string @base { get; set; }
-    public string target { get; set; }
-    public Market market { get; set; }
-    public double last { get; set; }
-    public double volume { get; set; }
-    public ConvertedLast converted_last { get; set; }
-    public ConvertedVolume converted_volume { get; set; }
-    public string trust_score { get; set; }
-    public double bid_ask_spread_percentage { get; set; }
-    public DateTime timestamp { get; set; }
-    public DateTime last_traded_at { get; set; }
-    public DateTime last_fetch_at { get; set; }
-    public bool is_anomaly { get; set; }
-    public bool is_stale { get; set; }
-    public string trade_url { get; set; }
-    public object token_info_url { get; set; }
-    public string coin_id { get; set; }
-    public string target_coin_id { get; set; }
 }
 
 public class TotalVolume
@@ -1699,6 +1622,5 @@ public class TotalVolume
     public long link { get; set; }
     public long sats { get; set; }
 }
-
 
 }
