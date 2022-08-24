@@ -27,7 +27,7 @@
                     <ul>
                         @foreach (var item in Model.Trend)
                         {
-                            <a href="#" data-toggle="modal" data-target="#exampleModalCenter">
+                            <a href="#" data-toggle="modal" data-target="#transactionModal">
                             <li><img src="@item.item.thumb" /> @item.item.name (@item.item.symbol) <span class="text-right">#@item.item.market_cap_rank</span></li></a>
 
                         }
@@ -41,7 +41,7 @@
                     <ul>
                         @foreach (var item in Model.Search)
                         {
-                            <a href="#" data-toggle="modal" data-target="#exampleModalCenter">
+                            <a href="#" data-toggle="modal" data-target="#transactionModal">
                             <li><img src="@item.thumb" /> @item.name (@item.symbol) <span class="text-right">#@item.market_cap_rank</span></li></a>
                             if (++count == 7)
                             {
@@ -54,7 +54,7 @@
             }
         </div>
     }
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="transactionModal" tabindex="-1" role="dialog" aria-labelledby="transactionModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
